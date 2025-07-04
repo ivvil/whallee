@@ -9,7 +9,7 @@
 
 (defmethod set-wallpaper ((h gnome-platform) path &optional dark-path)
   (let ((uri (format nil "file://~a" (uiop:native-namestring (truename path)))))
-	(uiop:run-program `("gsettings" "set" "org.gnome.desktop.background" "picture-uri" ,uri)) ;; TODO: Use dconf directly
+	(uiop:run-program `("gsettings" "set" "org.gnome.desktop.background" "picture-uri" ,uri)) ;; TODO: Use dconf directly (through dbus)
 	(when dark-path
 	  (let ((dark-uri (format nil "file://~a" (uiop:native-namestring (truename dark-path)))))
 		(uiop:run-program `("gsettings" "set" "org.gnome.desktop.background" "picture-uri" ,dark-uri))))))
