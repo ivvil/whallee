@@ -10,4 +10,8 @@
   :components ((:file "package")
                (:file "whallee")
 			   (:module "platform"
-				:components ((:file "base")))))
+				:components ((:file "base")
+							 (:file "gnome")
+							 (:file "macos")
+							 (:file "windows")
+							 (:file "xdg-portal")))))
