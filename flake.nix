@@ -6,19 +6,26 @@
 
   outputs = {
     self,
-    nixpkgs,
-    utils,
+      nixpkgs,
+      utils,
   }:
     utils.lib.eachDefaultSystem
-    (system: let
-      pkgs = import nixpkgs {
-        inherit system;
-      };
-    in {
-      devShells.default = pkgs.mkShell {
-        packages = with pkgs; [
-          pkg-config
+      (system: let
+        pkgs = import nixpkgs {
+          inherit system;
+        };
+        libs = with pkgs; [
+          libfixposix
         ];
-      };
-    });
+      in {
+        devShells.default = pkgs.mkShell {
+          packages = with pkgs; [
+            pkg-config
+          ] ++ libs;
+
+          shellHook = ''
+          export LD_LIBRARY_PATH=${pkgs.lib.makeLibraryPath libs}:$LD_LIBRARY_PATH
+        '';
+        };
+      });
 }
