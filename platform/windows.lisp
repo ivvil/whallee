@@ -3,7 +3,7 @@
 
 (defclass windows-platform (base-platform) ())
 
-;;; TODO: Test this 
+;;; TODO: This doesn't work
 
 (defmethod detect-environment ((h windows-platform))
   (uiop:os-windows-p))
